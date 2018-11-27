@@ -53,6 +53,9 @@ class Index extends Controller
             'SjArt'=>$SjArt  //随便看看
         ]);
     }
+    public function ws() {
+        echo 123;
+    }
 
     public function cikcls(MArticle $ma,MClassify $mc,$id) {  //点击分类显示相应数据和页面
        $data = $ma->where('fl_id',$id)->select();
