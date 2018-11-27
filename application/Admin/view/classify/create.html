@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>后台管理</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
+</head>
+<body>
+
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+       
+        <div class="result-wrap">
+            <div class="result-content">
+                <form action="/admin/classify/save" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                    <table class="insert-tab" width="100%">
+                        <tbody>
+                            <tr>
+                            <th width="120"><i class="require-red">*</i>分类：</th>
+                            <td>
+                               <input type="text" name="name">
+                            </td>
+                        </tr>
+                           
+                            
+                           
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <input class="btn btn-primary btn6 mr10" value="提交" type="submit" id='btn1'>
+                                    <input class="btn btn6" onClick="history.go(-1)" value="返回" type="button">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!--/main-->
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/static/js/wangEditor/release/wangEditor.min.js"></script>
+<script type="text/javascript">
+    var E = window.wangEditor
+    var editor = new E('#editor')
+    editor.customConfig.debug = location.href.indexOf('wangeditor_debug_mode=1') > 0 //debug
+    editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+    editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024  //设置图片大小
+    editor.customConfig.uploadImgMaxLength = 5 //设置最大上传图片数量
+  
+    document.getElementById('btn1').addEventListener('click', function () {
+        // 读取 html
+        var content=editor.txt.html();
+        document.getElementById('content').value = content;
+    }, false);
+
+    editor.create();
+    // editor.txt.html()
+</script>
+ <!-- <script type="text/javascript">
+    var E = window.wangEditor
+    var editor = new E('#editor')
+    // 或者 var editor = new E( document.getElementById('editor') )
+    editor.create()
+</script> -->
