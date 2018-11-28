@@ -26,11 +26,25 @@ class Index extends Controller
         ]);
     }
 
-    public function detail(Request $req,MArticle $ma) {
+    public function detail(Request $req,MArticle $ma,MClassify $mc) {
             $id = $_GET['id'];
             $data = $ma->get($id);
+
+            $data1 = $ma->all();
+            $classify = $mc->all();
+            $zxA = $ma->order('id','desc')->limit(5)->select();
+            for($i=0;$i<count($data1);$i++) {
+                $Sid[] =$data1[$i]['id'];
+            }
+            shuffle($Sid);
+            for($i=0;$i<count($data1);$i++) {
+                $SjArt[] = $ma->find($Sid[$i]);
+            }
             return view('',[
                 'data'=>$data,
+                'classify'=>$classify,   //分类
+                'zxA'=>$zxA,        //作者推荐
+                'SjArt'=>$SjArt  //随便看看
             ]);
     }
 
@@ -43,7 +57,7 @@ class Index extends Controller
             $Sid[] =$data1[$i]['id'];
         }
         shuffle($Sid);
-        for($i=0;$i<5;$i++) {
+        for($i=0;$i<count($data);$i++) {
             $SjArt[] = $ma->find($Sid[$i]);
         }
         return view('',[
@@ -52,9 +66,6 @@ class Index extends Controller
             'zxA'=>$zxA,        //作者推荐
             'SjArt'=>$SjArt  //随便看看
         ]);
-    }
-    public function ws() {
-        echo 123;
     }
 
     public function cikcls(MArticle $ma,MClassify $mc,$id) {  //点击分类显示相应数据和页面
@@ -66,7 +77,7 @@ class Index extends Controller
            $Sid[] =$data1[$i]['id'];
        }
        shuffle($Sid);
-       for($i=0;$i<4;$i++) {
+       for($i=0;$i<count($data);$i++) {
            $SjArt[] = $ma->find($Sid[$i]);
        }
        return view('',[
