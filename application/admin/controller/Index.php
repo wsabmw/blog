@@ -1,10 +1,7 @@
 <?php
-
 namespace app\admin\controller;
-
 use think\Controller;
 use think\Request;
-
 class Index extends Controller
 {
     /**
@@ -16,9 +13,7 @@ class Index extends Controller
     {
         return view('');
     }
-
      public function home() {
          return view('');
      }
-
 }

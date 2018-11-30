@@ -82,6 +82,24 @@
         document.getElementById('content').value = content;
     }, false);
 
+
+     // 配置服务器端地址
+     var a = editor.customConfig.uploadImgServer = '/admin/index/uploads';
+     editor.customConfig.uploadImgHooks = {
+            customInsert: function (insertImg, result, editor) {
+                console.log(JSON.stringify(result))
+                console.log(insertImg)
+                console.log(editor)
+                insertImg(result.data[0])
+                console.log(insertImg)
+
+            },
+
+
+        }
+
+
+
     editor.create();
     // editor.txt.html()
 </script>
