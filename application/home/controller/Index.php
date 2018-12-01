@@ -16,8 +16,8 @@ class Index extends Controller
      */
     public function index(MArticle $ma)
     {
-        $data = MArticle::paginate(5);
-        // dump($data);
+        $data = $ma->order('id','desc')->paginate(5);
+        // dump($data->toarray());
         
         $rw = $ma->order('browse','desc')->limit(5)->select();
         return view('',[
@@ -48,8 +48,15 @@ class Index extends Controller
             ]);
     }
 
-    public function article(MArticle $ma,MClassify $mc) {
-        $data = MArticle::paginate(5);
+    public function article(MArticle $ma,MClassify $mc,Request $req) {
+        if($req->title) {
+            $data = MArticle::withSearch(['title'], [
+                       'title'	=>	$req->title,
+                     ])
+                     ->paginate(5);
+        }else {
+             $data = MArticle::paginate(5);            
+        }
         $data1 = $ma->all();
         $classify = $mc->all();
         $zxA = $ma->order('id','desc')->limit(5)->select();
@@ -57,7 +64,7 @@ class Index extends Controller
             $Sid[] =$data1[$i]['id'];
         }
         shuffle($Sid);
-        for($i=0;$i<count($data);$i++) {
+        for($i=0;$i<count($data1);$i++) {
             $SjArt[] = $ma->find($Sid[$i]);
         }
         return view('',[

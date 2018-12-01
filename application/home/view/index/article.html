@@ -23,6 +23,13 @@
     <link href="/static/css/global.css" rel="stylesheet" />
     <!--本页样式表-->
     <link href="/static/css/article.css" rel="stylesheet" />
+    <style>
+        .ws {
+            width: 50px;
+            height: 38px;
+            border: 1px solid white;
+        }
+    </style>
 </head>
 <body>
     <!-- 导航 -->
@@ -109,13 +116,14 @@
                 </div>
                 <div class="blog-main-right">
                     <div class="blog-search">
-                        <form class="layui-form" action="">
+                        <form class="layui-form" action="/home/index/article" method="POST">
                             <div class="layui-form-item">
                                 <div class="search-keywords  shadow">
-                                    <input type="text" name="keywords" lay-verify="required" placeholder="输入关键词搜索" autocomplete="off" class="layui-input">
+                                    <input type="text" name="title" lay-verify="required" placeholder="输入关键词搜索" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="search-submit  shadow">
-                                    <a class="search-btn" lay-submit="formSearch" lay-filter="formSearch"><i class="fa fa-search"></i></a>
+                                    <!-- <a class="search-btn" lay-submit="formSearch" lay-filter="formSearch"><i class="fa fa-search"></i></a> -->
+                                    <input type="submit" value="搜索" class="ws">
                                 </div>
                             </div>
                         </form>

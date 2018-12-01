@@ -22,15 +22,18 @@ class Index extends Controller
      }
 
      public function uploads(Request $req) {
-        $date = time();
-        $file = $_FILES['Snip20181128_7_png'];
-        move_uploaded_file($file['tmp_name'],\Env::get('root_path').'public/static/'.$date.'.png');
-        return json_encode([
-                "errno"=>0,
-                "data"=>[
-                    '/static/uploads/images/uploads/'.$date.'.png',
-                        ]
-           
-       ]);
+         foreach($_FILES as $k=>$v) {
+                $date = time();
+                $file = $_FILES[$k];
+                move_uploaded_file($file['tmp_name'],\Env::get('root_path').'public/static/images/uploads/'.$date.'.png');
+                return json_encode([
+                        "errno"=>0,
+                        "data"=>[
+                            '/static/images/uploads/'.$date.'.png',
+                                ]
+                
+                        ]);
+         }
+   
      } 
 }
